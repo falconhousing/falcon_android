@@ -15,5 +15,6 @@ public class Constants {
 
     public static final String AUDIO_UPLOAD_URL = "http://dharmendrav.housing.com:4000/audios.json";
     public static final String GET_STORIES_URL = "http://dharmendrav.housing.com:4000/get_feed/?latitude=19&longitude=72";
+    public static final String GET_CHANNELS_URL = "http://dharmendrav.housing.com:4000/get_feed_grouped/?latitude=19&longitude=72";
 
 }

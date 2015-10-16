@@ -9,11 +9,13 @@ import android.widget.ListView;
 
 import com.locon.withu.R;
 
+import java.util.ArrayList;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class ChannelsFragment extends Fragment {
+public class ChannelsFragment extends Fragment implements ChannelFetcherTask.ChannelsFetcherListener {
 
     @InjectView(R.id.lvChannels)
     ListView lvChannels;
@@ -41,10 +43,21 @@ public class ChannelsFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews();
+        fetchChannels();
     }
 
     private void initViews() {
         adapter = new ChannelAdapter(getContext(), null);
         lvChannels.setAdapter(adapter);
+    }
+
+    private void fetchChannels() {
+        ChannelFetcherTask task = new ChannelFetcherTask(this);
+        task.execute();
+    }
+
+    @Override
+    public void onChannelsFetched(ArrayList<Channel> channels) {
+        adapter.updateContent(channels);
     }
 }

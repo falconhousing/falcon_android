@@ -5,6 +5,7 @@ import android.location.Location;
 import android.util.Log;
 
 import com.alexbbb.uploadservice.MultipartUploadRequest;
+import com.locon.withu.utils.Utils;
 
 import java.io.File;
 
@@ -20,6 +21,9 @@ public class Uploader {
     public static void uploadMultipart(MultipartUploadRequest request, String filePath, Location location) {
         if (filePath == null)
             return;
+
+        String address = Utils.getAddress(location.getLatitude(), location.getLongitude());
+
         File file = new File(filePath);
         request.addFileToUpload(filePath,
                 "audio",
@@ -36,6 +40,7 @@ public class Uploader {
         request.addParameter("acl", "public");
         request.addParameter("latitude", location.getLatitude() + "");
         request.addParameter("longitude", location.getLongitude() + "");
+        request.addParameter("location", address);
         // set the maximum number of automatic upload retries on error
         request.setMaxRetries(2);
 

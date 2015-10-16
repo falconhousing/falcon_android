@@ -61,6 +61,11 @@ public class ChannelAdapter extends BaseAdapter {
 
     }
 
+    public void updateContent(ArrayList<Channel> channels) {
+        this.channels = channels;
+        notifyDataSetChanged();
+    }
+
     public static class ChannelViewHolder {
 
         public ChannelViewHolder(View view) {

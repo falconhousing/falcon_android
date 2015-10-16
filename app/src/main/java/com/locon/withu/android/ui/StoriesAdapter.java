@@ -76,7 +76,7 @@ public class StoriesAdapter extends BaseAdapter {
 
     public void updateContent(ArrayList<Story> stories) {
         this.stories = stories;
-        notifyDataSetChanged();
+         notifyDataSetChanged();
     }
 
     public static class StoryViewHolder {

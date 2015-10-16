@@ -112,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements LocationProvider.
 
     private void makeFileUploadRequest(Location location) {
         MultipartUploadRequest request = Uploader.createRequest(this, Constants.AUDIO_UPLOAD_URL, "2138991");
-        // mFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Music/Chasing Cars.mp3";
         Uploader.uploadMultipart(request, mFilePath, location);
         //NetworkUtils.initMultipartUpload(Constants.AUDIO_UPLOAD_URL, mFilePath, location);
     }

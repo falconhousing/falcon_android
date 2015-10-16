@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.locon.withu.R;
-import com.locon.withu.android.ui.android.adapters.StoriesFetcherTask;
 
 import java.util.ArrayList;
 
