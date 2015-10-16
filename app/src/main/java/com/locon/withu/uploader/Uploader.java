@@ -1,9 +1,12 @@
 package com.locon.withu.uploader;
 
 import android.content.Context;
+import android.location.Location;
 import android.util.Log;
 
 import com.alexbbb.uploadservice.MultipartUploadRequest;
+
+import java.io.File;
 
 /**
  * Created by yogesh on 16/10/15.
@@ -14,12 +17,12 @@ public class Uploader {
         return new MultipartUploadRequest(context, custom_upload_id, url);
     }
 
-    public static void uploadMultipart(MultipartUploadRequest request) {
-
-        request.addFileToUpload("/absolute/path/to/your/file",
-                "parameter-name",
-                "custom-file-name.extension",
-                "content-type");
+    public static void uploadMultipart(MultipartUploadRequest request, String filePath, Location location) {
+        File file = new File(filePath);
+        request.addFileToUpload(filePath,
+                "audio",
+                file.getName(),
+                "audio/3gpp");
 
         request.setNotificationConfig(android.R.drawable.ic_menu_upload,
                 "notification title",
@@ -28,10 +31,9 @@ public class Uploader {
                 "upload error text",
                 false);
 
-        // set a custom user agent string for the upload request
-        // if you comment the following line, the system default user-agent will be used
-        request.setCustomUserAgent("UploadServiceDemo/1.0");
-
+        request.addParameter("acl", "public");
+        request.addParameter("latitude", location.getLatitude() + "");
+        request.addParameter("longitude", location.getLongitude() + "");
         // set the maximum number of automatic upload retries on error
         request.setMaxRetries(2);
 
