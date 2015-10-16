@@ -1,72 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/drawee_view_avatar"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        fresco:roundAsCircle="true" />
+
 
     <ImageView
-        android:id="@+id/ivAvatar"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
-
-    <LinearLayout
+        android:id="@+id/image_like"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/tvUsername"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@android:drawable/ic_input_add" />
 
 
-        <TextView
-            android:id="@+id/tvDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/drawee_view_avatar"
+        android:text="Jack Sparrow"
+        android:textSize="20sp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+    <TextView
+        android:id="@+id/tvTrackName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvUsername"
+        android:layout_toRightOf="@id/drawee_view_avatar"
+        android:text="Stupid Song "
+        android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/tvLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tvLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTrackName"
+        android:layout_toRightOf="@id/drawee_view_avatar"
+        android:drawableLeft="@android:drawable/ic_input_add"
+        android:text="Chandivali, Mumbai"
+        android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/tvViews"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/views_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/image_like"
+        android:layout_toRightOf="@+id/tvLocation"
+        android:gravity="right"
+        android:text="24 views"
+        android:textSize="14sp" />
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <ImageButton
-                android:id="@+id/ibPlay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-
-            <ImageButton
-                android:id="@+id/ibFollow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/btn_play"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/tvLocation"
+        android:layout_toRightOf="@+id/drawee_view_avatar"
+        android:background="@drawable/capsule_orange"
+        android:backgroundTintMode="add"
+        android:drawableLeft="@android:drawable/ic_dialog_email"
+        android:padding="4dp"
+        android:text="@string/play"
+        android:textSize="12sp" />
 
 
-</LinearLayout>
+    <Button
+        android:id="@+id/btn_follow"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/tvLocation"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@+id/btn_play"
+        android:background="@drawable/capsule_orange"
+        android:drawableLeft="@android:drawable/ic_menu_add"
+        android:minWidth="120dp"
+        android:padding="4dp"
+        android:text="@string/following"
+        android:textSize="12sp" />
+</RelativeLayout>

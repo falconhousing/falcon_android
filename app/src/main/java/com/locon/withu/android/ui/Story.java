@@ -10,6 +10,8 @@ public class Story {
     public String location;
     public String poi;
     public int user_id;
+    public String user_name;
+    public boolean isFollowingUser;
     public String name;
     public String audio_url;
     public int views;

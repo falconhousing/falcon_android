@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.locon.withu.R;
 
 import java.util.ArrayList;
@@ -61,8 +63,15 @@ public class StoriesAdapter extends BaseAdapter {
 
     private void setItemDetails(int position, StoryViewHolder holder) {
         Story story = stories.get(position);
-        holder.tvViews.setText(story.views + "");
-        holder.tvLocation.setText(story.location + "");
+        holder.mViewCountTextView.setText(story.views + "");
+        holder.mLocationTextView.setText(story.location + "");
+        holder.mPlayButton.setTag(story.audio_url);
+        if (story.isFollowingUser) {
+            holder.mFollowButton.setText("Following");
+        } else {
+            holder.mFollowButton.setText("Follow");
+        }
+        holder.mFollowButton.setTag(story.isFollowingUser);
     }
 
     public void updateContent(ArrayList<Story> stories) {
@@ -71,18 +80,24 @@ public class StoriesAdapter extends BaseAdapter {
     }
 
     public static class StoryViewHolder {
-
-        public TextView tvViews;
-        public ImageButton ibPlay;
-        public ImageButton ibFollow;
-        public TextView tvLocation;
+        private final TextView mLocationTextView;
+        public SimpleDraweeView mAvatarView;
+        public TextView mPersonTextView;
+        public TextView mStoryTitleTextView;
+        public TextView mViewCountTextView;
+        public ImageView mLikeButton;
+        public Button mPlayButton;
+        public Button mFollowButton;
 
         public StoryViewHolder(View view) {
-            tvViews = (TextView) view.findViewById(R.id.tvViews);
-            tvLocation = (TextView) view.findViewById(R.id.tvLocation);
-            ibPlay = (ImageButton) view.findViewById(R.id.ibPlay);
-            ibFollow = (ImageButton) view.findViewById(R.id.ibFollow);
-
+            mAvatarView = (SimpleDraweeView) view.findViewById(R.id.drawee_view_avatar);
+            mPersonTextView = (TextView) view.findViewById(R.id.tvUsername);
+            mStoryTitleTextView = (TextView) view.findViewById(R.id.tvDescription);
+            mLocationTextView = (TextView) view.findViewById(R.id.tvLocation);
+            mViewCountTextView = (TextView) view.findViewById(R.id.views_count);
+            mLikeButton = (ImageView) view.findViewById(R.id.image_like);
+            mPlayButton = (Button) view.findViewById(R.id.btn_play);
+            mFollowButton = (Button) view.findViewById(R.id.btn_follow);
         }
     }
 }
