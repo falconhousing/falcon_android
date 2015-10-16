@@ -130,7 +130,7 @@ public class AudioRecordActivity extends Activity {
 
     public AudioRecordActivity() {
         mFileName = Environment.getExternalStorageDirectory().getAbsolutePath();
-        mFileName += "/audiorecordtest.3gp";
+        mFileName += "/" + System.currentTimeMillis() + ".3gp";
     }
 
     @Override

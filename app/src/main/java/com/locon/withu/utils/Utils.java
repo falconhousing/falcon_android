@@ -1,13 +1,18 @@
 package com.locon.withu.utils;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import com.locon.withu.MainApplication;
 import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
+import java.util.Locale;
 
 public class Utils {
     public static <T> T parse(Response response, Class<T> tClass) {
@@ -49,5 +54,23 @@ public class Utils {
 
     public static void logCustomException(Exception e, String s) {
         Log.e(s, "Exception occurred: " + e.getMessage());
+    }
+
+
+    public static String getAddress(double latitude, double longitude) {
+        StringBuilder result = new StringBuilder();
+        try {
+            Geocoder geocoder = new Geocoder(MainApplication.getInstance(), Locale.getDefault());
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses.size() > 0) {
+                Address address = addresses.get(0);
+                result.append(address.getLocality()).append("\n");
+                result.append(address.getCountryName());
+            }
+        } catch (IOException e) {
+            Log.e("tag", e.getMessage());
+        }
+
+        return result.toString();
     }
 }
