@@ -1,4 +1,4 @@
-package com.locon.withu.android.ui;
+package com.locon.withu.android.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

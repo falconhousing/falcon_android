@@ -3,6 +3,7 @@ package com.locon.withu.android.ui;
 import android.os.AsyncTask;
 
 import com.locon.withu.Constants;
+import com.locon.withu.models.Story;
 import com.locon.withu.utils.NetworkUtils;
 import com.locon.withu.utils.Utils;
 import com.squareup.okhttp.Response;

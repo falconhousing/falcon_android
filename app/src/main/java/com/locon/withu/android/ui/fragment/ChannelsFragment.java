@@ -1,4 +1,4 @@
-package com.locon.withu.android.ui;
+package com.locon.withu.android.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.locon.withu.R;
+import com.locon.withu.android.ui.ChannelFetcherTask;
+import com.locon.withu.android.ui.android.adapters.ChannelAdapter;
+import com.locon.withu.models.Channel;
 
 import java.util.ArrayList;
 

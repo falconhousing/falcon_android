@@ -1,4 +1,4 @@
-package com.locon.withu;
+package com.locon.withu.android.ui.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import com.locon.withu.Constants;
 
 import java.io.IOException;
 

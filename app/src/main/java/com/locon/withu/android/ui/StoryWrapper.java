@@ -1,5 +1,7 @@
 package com.locon.withu.android.ui;
 
+import com.locon.withu.models.Story;
+
 import java.util.ArrayList;
 
 /**

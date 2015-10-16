@@ -1,4 +1,4 @@
-package com.locon.withu.android.ui;
+package com.locon.withu.android.ui.android.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.locon.withu.R;
+import com.locon.withu.models.Story;
 
 import java.util.ArrayList;
 
@@ -92,7 +93,7 @@ public class StoriesAdapter extends BaseAdapter {
         public StoryViewHolder(View view) {
             mAvatarView = (SimpleDraweeView) view.findViewById(R.id.drawee_view_avatar);
             mPersonTextView = (TextView) view.findViewById(R.id.tvUsername);
-            mStoryTitleTextView = (TextView) view.findViewById(R.id.tvDescription);
+            mStoryTitleTextView = (TextView) view.findViewById(R.id.tvTrackName);
             mLocationTextView = (TextView) view.findViewById(R.id.tvLocation);
             mViewCountTextView = (TextView) view.findViewById(R.id.views_count);
             mLikeButton = (ImageView) view.findViewById(R.id.image_like);

@@ -22,6 +22,7 @@ android {
 repositories {
     // ...
     maven { url "https://jitpack.io" }
+    mavenCentral()
 }
 
 
@@ -37,4 +38,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:5.1.2'
     compile 'com.facebook.fresco:fresco:0.7.0+'
     compile "com.facebook.fresco:imagepipeline-okhttp:0.7.0+"
+    compile 'com.facebook.android:facebook-android-sdk:4.7.0'
 }

@@ -1,5 +1,7 @@
 package com.locon.withu.android.ui;
 
+import com.locon.withu.models.Channel;
+
 import java.util.ArrayList;
 
 /**

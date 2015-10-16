@@ -2,6 +2,12 @@ package com.locon.withu;
 
 import android.app.Application;
 
+import com.facebook.FacebookSdk;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.backends.okhttp.OkHttpImagePipelineConfigFactory;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.squareup.okhttp.OkHttpClient;
+
 
 public class MainApplication extends Application {
 
@@ -18,5 +24,15 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        FacebookSdk.sdkInitialize(this);
+        initFresco();
+    }
+
+    private void initFresco() {
+        OkHttpClient okHttpClient = new OkHttpClient();
+        ImagePipelineConfig config = OkHttpImagePipelineConfigFactory
+                .newBuilder(this, okHttpClient)
+                .build();
+        Fresco.initialize(this, config);
     }
 }

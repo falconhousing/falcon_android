@@ -1,4 +1,4 @@
-package com.locon.withu.android.ui;
+package com.locon.withu.android.ui.android.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,35 +7,37 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.locon.withu.R;
+import com.locon.withu.models.Locality;
 
 import java.util.ArrayList;
 
 /**
  * Created by yogesh on 16/10/15.
  */
-public class ChannelAdapter extends BaseAdapter {
+class LocalityAdapter extends BaseAdapter {
 
-    private ArrayList<Channel> channels;
+    private ArrayList<Locality> localities;
 
     private Context context;
 
     private final LayoutInflater inflater;
 
-    public ChannelAdapter(Context context, ArrayList<Channel> channels) {
-        if (channels == null)
-            this.channels = new ArrayList<>();
+    public LocalityAdapter(Context context, ArrayList<Locality> localities) {
+        if (localities == null)
+            this.localities = localities;
         this.context = context;
+        this.localities = localities;
         this.inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return channels.size();
+        return localities.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return channels.get(position);
+        return localities.get(position);
     }
 
     @Override
@@ -45,13 +47,13 @@ public class ChannelAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ChannelViewHolder holder = null;
+        LocalityViewHolder holder = null;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_item_channel, parent, false);
-            holder = new ChannelViewHolder(convertView);
+            convertView = inflater.inflate(R.layout.list_item_locality, parent, false);
+            holder = new LocalityViewHolder(convertView);
             convertView.setTag(holder);
         } else {
-            holder = (ChannelViewHolder) convertView.getTag();
+            holder = (LocalityViewHolder) convertView.getTag();
         }
         setItemDetails();
         return convertView;
@@ -61,15 +63,11 @@ public class ChannelAdapter extends BaseAdapter {
 
     }
 
-    public void updateContent(ArrayList<Channel> channels) {
-        this.channels = channels;
-        notifyDataSetChanged();
-    }
+    public static class LocalityViewHolder {
 
-    public static class ChannelViewHolder {
-
-        public ChannelViewHolder(View view) {
+        public LocalityViewHolder(View view) {
 
         }
     }
+
 }

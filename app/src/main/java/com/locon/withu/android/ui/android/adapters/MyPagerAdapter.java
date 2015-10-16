@@ -5,9 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.locon.withu.Constants;
-import com.locon.withu.android.ui.ChannelsFragment;
-import com.locon.withu.android.ui.LocationsFragment;
-import com.locon.withu.android.ui.StoriesFragment;
+import com.locon.withu.android.ui.fragment.ChannelsFragment;
+import com.locon.withu.android.ui.fragment.LocationsFragment;
+import com.locon.withu.android.ui.fragment.StoriesFragment;
 
 import java.util.List;
 
