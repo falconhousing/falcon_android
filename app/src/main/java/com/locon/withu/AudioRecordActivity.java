@@ -2,6 +2,7 @@ package com.locon.withu;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Bundle;
@@ -105,6 +106,11 @@ public class AudioRecordActivity extends Activity {
 
         OnClickListener clicker = new OnClickListener() {
             public void onClick(View v) {
+                Bundle response = new Bundle();
+                response.putString(Constants.KEY_RECORDED_FILE_URI, mFileName);
+                setResult(Activity.RESULT_OK, new Intent().putExtras(response));
+                finish();
+
                 onPlay(mStartPlaying);
                 if (mStartPlaying) {
                     setText("Stop playing");

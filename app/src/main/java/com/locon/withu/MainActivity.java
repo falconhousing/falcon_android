@@ -1,5 +1,6 @@
 package com.locon.withu;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,8 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                startActivity(new Intent(MainActivity.this, AudioRecordActivity.class));
+                startActivityForResult(new Intent(MainActivity.this, AudioRecordActivity.class), Constants.REQUEST_CODE_RECORD);
             }
         });
     }
@@ -50,5 +53,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case Constants.REQUEST_CODE_RECORD:
+                if (resultCode == Activity.RESULT_OK) {
+                    Bundle extras = data.getExtras();
+                    String fileName = extras.getString(Constants.KEY_RECORDED_FILE_URI);
+                    Toast.makeText(this, "filename is " + fileName, Toast.LENGTH_LONG).show();
+                    makeFileUploadRequest();
+                }
+        }
+    }
+
+    private void makeFileUploadRequest() {
+
     }
 }
