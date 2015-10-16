@@ -74,12 +74,12 @@ public class MainActivity extends AppCompatActivity implements LocationProvider.
                     Bundle extras = data.getExtras();
                     String fileName = extras.getString(Constants.KEY_RECORDED_FILE_URI);
                     Toast.makeText(this, "filename is " + fileName, Toast.LENGTH_LONG).show();
-                    makeFileUploadRequest();
+                    makeFileUploadRequest(fileName);
                 }
         }
     }
 
-    private void makeFileUploadRequest() {
+    private void makeFileUploadRequest(String fileName) {
         Uploader.uploadMultipart(Uploader.createRequest(this, "https://www.youtube.com", "2138991"));
     }
 
