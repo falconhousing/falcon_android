@@ -1,4 +1,4 @@
-package com.locon.withu.android.ui;
+package com.locon.withu.android.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,15 +13,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class ChannelsFragment extends Fragment {
+public class StoriesFragment extends Fragment {
 
-    @InjectView(R.id.lvChannels)
-    ListView lvChannels;
+    @InjectView(R.id.lvStories)
+    ListView lvStories;
 
-    private ChannelAdapter adapter;
-
-    public static ChannelsFragment newInstance() {
-        ChannelsFragment fragment = new ChannelsFragment();
+    public static StoriesFragment newInstance() {
+        StoriesFragment fragment = new StoriesFragment();
         return fragment;
     }
 
@@ -32,7 +30,7 @@ public class ChannelsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_channels, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_stories, container, false);
         ButterKnife.inject(this, rootView);
         return rootView;
     }
@@ -44,7 +42,5 @@ public class ChannelsFragment extends Fragment {
     }
 
     private void initViews() {
-        adapter = new ChannelAdapter(getContext(), null);
-        lvChannels.setAdapter(adapter);
     }
 }

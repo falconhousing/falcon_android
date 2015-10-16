@@ -1,4 +1,4 @@
-package com.locon.withu.android.ui;
+package com.locon.withu.android.ui.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,13 +13,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class StoriesFragment extends Fragment {
+public class LocationsFragment extends Fragment {
 
-    @InjectView(R.id.lvStories)
-    ListView lvStories;
+    @InjectView(R.id.lvLocations)
+    ListView lvLocations;
 
-    public static StoriesFragment newInstance() {
-        StoriesFragment fragment = new StoriesFragment();
+    public static LocationsFragment newInstance() {
+        LocationsFragment fragment = new LocationsFragment();
         return fragment;
     }
 
@@ -30,7 +30,7 @@ public class StoriesFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_stories, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_locations, container, false);
         ButterKnife.inject(this, rootView);
         return rootView;
     }

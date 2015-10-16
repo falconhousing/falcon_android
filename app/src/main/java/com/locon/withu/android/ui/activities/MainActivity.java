@@ -1,4 +1,4 @@
-package com.locon.withu;
+package com.locon.withu.android.ui.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.alexbbb.uploadservice.MultipartUploadRequest;
+import com.locon.withu.Constants;
+import com.locon.withu.R;
 import com.locon.withu.android.ui.android.adapters.MyPagerAdapter;
 import com.locon.withu.location.LocationProvider;
 import com.locon.withu.uploader.Uploader;

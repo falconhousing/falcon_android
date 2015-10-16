@@ -1,4 +1,4 @@
-package com.locon.withu.android.ui;
+package com.locon.withu.android.ui.android.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,35 +7,37 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.locon.withu.R;
+import com.locon.withu.models.Story;
 
 import java.util.ArrayList;
 
 /**
  * Created by yogesh on 16/10/15.
  */
-public class ChannelAdapter extends BaseAdapter {
+public class StoriesAdapter extends BaseAdapter {
 
-    private ArrayList<Channel> channels;
+    private ArrayList<Story> stories;
 
     private Context context;
 
     private final LayoutInflater inflater;
 
-    public ChannelAdapter(Context context, ArrayList<Channel> channels) {
-        if (channels == null)
-            this.channels = new ArrayList<>();
+    public StoriesAdapter(Context context, ArrayList<Story> stories) {
+        if (stories == null)
+            this.stories = new ArrayList<>();
         this.context = context;
+        this.stories = stories;
         this.inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return channels.size();
+        return stories.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return channels.get(position);
+        return stories.get(position);
     }
 
     @Override
@@ -45,13 +47,13 @@ public class ChannelAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ChannelViewHolder holder = null;
+        StoryViewHolder holder = null;
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.list_item_channel, parent, false);
-            holder = new ChannelViewHolder(convertView);
+            convertView = inflater.inflate(R.layout.list_item_story, parent, false);
+            holder = new StoryViewHolder(convertView);
             convertView.setTag(holder);
         } else {
-            holder = (ChannelViewHolder) convertView.getTag();
+            holder = (StoryViewHolder) convertView.getTag();
         }
         setItemDetails();
         return convertView;
@@ -61,9 +63,9 @@ public class ChannelAdapter extends BaseAdapter {
 
     }
 
-    public static class ChannelViewHolder {
+    public static class StoryViewHolder {
 
-        public ChannelViewHolder(View view) {
+        public StoryViewHolder(View view) {
 
         }
     }
