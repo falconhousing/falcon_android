@@ -39,6 +39,26 @@ public class LocationProviderOptions {
         mBestAccuracy = DEFAULT_BEST_ACCURACY;
     }
 
+    public LocationProviderOptions(int priority, int interval, int fastInterval, int bestAccuracy) {
+        mPriority = priority;
+        mInterval = interval;
+        mFastInterval = fastInterval;
+        mBestAccuracy = bestAccuracy;
+    }
+
+    public void setPriority(int priority) {
+        this.mPriority = priority;
+    }
+
+    public void setmnterval(int interval) {
+        this.mInterval = interval;
+    }
+
+    public void setFastInterval(int fastInterval) {
+        this.mFastInterval = fastInterval;
+    }
+
+
     public boolean isBestApproximation(Location location) {
         return location.getAccuracy() <= mBestAccuracy;
     }

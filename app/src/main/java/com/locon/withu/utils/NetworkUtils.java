@@ -26,7 +26,7 @@ public class NetworkUtils {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static final MediaType MEDIA_TYPE_JPG = MediaType.parse("image/jpg");
 
-    public static final boolean isNetworkConnected(Context context) {
+    public static boolean isNetworkConnected(Context context) {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo info = cm.getActiveNetworkInfo();
@@ -67,9 +67,6 @@ public class NetworkUtils {
                 info.getType() == ConnectivityManager.TYPE_WIFI);
     }
 
-    /*
-        Method that makes a post call using OkHttpLibrary
-     */
     public static void doPostCall(String url, String jsonRequestObject,
                                   OkHttpCallback cb) {
         OkHttpClient client = new OkHttpClient();
@@ -83,9 +80,6 @@ public class NetworkUtils {
         call.enqueue(cb);
     }
 
-    /*
-        Method that makes a get call using OkHttpLibrary
-     */
     public static void doGetCall(String url, OkHttpCallback cb) {
         Logger.logd(NetworkUtils.class, "Url : " + url);
         OkHttpClient client = new OkHttpClient();

@@ -10,11 +10,11 @@ import com.alexbbb.uploadservice.MultipartUploadRequest;
  */
 public class Uploader {
 
-    public MultipartUploadRequest createRequest(Context context, String url, String custom_upload_id) {
+    public static MultipartUploadRequest createRequest(Context context, String url, String custom_upload_id) {
         return new MultipartUploadRequest(context, custom_upload_id, url);
     }
 
-    public void uploadMultipart(MultipartUploadRequest request) {
+    public static void uploadMultipart(MultipartUploadRequest request) {
 
         request.addFileToUpload("/absolute/path/to/your/file",
                 "parameter-name",

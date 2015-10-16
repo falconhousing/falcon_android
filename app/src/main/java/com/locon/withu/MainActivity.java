@@ -2,6 +2,7 @@ package com.locon.withu;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,8 +13,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.locon.withu.location.LocationProvider;
+import com.locon.withu.uploader.Uploader;
+import com.locon.withu.utils.Logger;
 
+public class MainActivity extends AppCompatActivity implements LocationProvider.LocationProviderListener {
+
+
+    private static final String LOG_TAG = "MainActivity";
+    private LocationProvider mLocationProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(new Intent(MainActivity.this, AudioRecordActivity.class), Constants.REQUEST_CODE_RECORD);
             }
         });
+        mLocationProvider = new LocationProvider(this, this);
+        mLocationProvider.requestLocation();
     }
 
     @Override
@@ -70,6 +80,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void makeFileUploadRequest() {
+        Uploader.uploadMultipart(Uploader.createRequest(this, "https://www.youtube.com", "2138991"));
+    }
+
+    @Override
+    public void onLocationFetched(Location location) {
+        Logger.logd(LOG_TAG, "Got new location: latitude: " + location.getLatitude() + " longitude: " + location.getLongitude() + " altitude: " + location.getAltitude());
+        mLocationProvider.requestLocation();
+    }
+
+    @Override
+    public void onRequestFailed() {
 
     }
 }

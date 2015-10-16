@@ -12,9 +12,6 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
-/**
- * Created by yogesh on 28/08/15.
- */
 public class LocationProvider extends Handler implements LocationListener, GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
@@ -29,9 +26,17 @@ public class LocationProvider extends Handler implements LocationListener, Googl
     private GoogleApiClient mGoogleApiClient;
     private LocationProviderListener mProviderListener;
 
-    public LocationProvider(Context mContext, LocationProviderOptions mOptions) {
+    public LocationProvider(Context context, LocationProviderListener listener) {
+        this.mContext = context;
+        this.mProviderOptions = new LocationProviderOptions();
+        this.mProviderListener = listener;
+        initGoogleApiClient();
+    }
+
+    public LocationProvider(Context mContext, LocationProviderOptions mOptions, LocationProviderListener listener) {
         this.mContext = mContext;
         this.mProviderOptions = mOptions;
+        this.mProviderListener = listener;
         initGoogleApiClient();
     }
 
