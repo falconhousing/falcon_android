@@ -2,6 +2,7 @@ package com.locon.withu.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
@@ -24,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 public class NetworkUtils {
     private static final String TAG = "locon.com.Utils.NetworkUtils";
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-    private static final MediaType MEDIA_TYPE_JPG = MediaType.parse("image/jpg");
+    private static final MediaType MEDIA_TYPE_MPEG = MediaType.parse("audio/mpeg");
 
     public static boolean isNetworkConnected(Context context) {
         ConnectivityManager cm =
@@ -94,31 +95,17 @@ public class NetworkUtils {
         Method for multipart upload
      */
 
-    public static Response initMultipartUpload(String url, String filepath,
-                                               String imageName, String imageType, String imagehash,
-                                               Context context) {
+    public static Response initMultipartUpload(String url, String filepath, Location location) {
         OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(60, TimeUnit.SECONDS); // connect timeout
         client.setReadTimeout(60, TimeUnit.SECONDS);
-//        String policy = PreferenceUtils.getPreferenceValue(context, "policy", null);
-//        String signature = PreferenceUtils.getPreferenceValue(context, "signature", null);
-//        String access_id = PreferenceUtils.getPreferenceValue(context, "access_id", null);
-//        String acl = PreferenceUtils.getPreferenceValue(context, "acl", null);
-//        String prefix = PreferenceUtils.getPreferenceValue(context, "prefix", null);
-//        String s3_url = PreferenceUtils.getPreferenceValue(context, "s3_url", null);
-//        String s3_key = prefix + "/" + imagehash + "/" + imageType + ".jpg";
-//        Logger.logd(NetworkUtils.class, s3_key + " code");
         MultipartBuilder multipartBuilder = new MultipartBuilder().type(MultipartBuilder.FORM);
-//        multipartBuilder.addFormDataPart("policy", policy);
-//        multipartBuilder.addFormDataPart("signature", signature);
-//        multipartBuilder.addFormDataPart("AWSAccessKeyId", access_id);
-//        multipartBuilder.addFormDataPart("Content-Type", "image/jpeg");
-//        multipartBuilder.addFormDataPart("secure", "true");
-//        multipartBuilder.addFormDataPart("acl", acl);
-//        multipartBuilder.addFormDataPart("success_action_status", "201");
-//        multipartBuilder.addFormDataPart("key", s3_key);
+        multipartBuilder.addFormDataPart("acl", "public");
+        multipartBuilder.addFormDataPart("Content-Type", "audio/mp3");
+        multipartBuilder.addFormDataPart("latitude", location.getLatitude() + "");
+        multipartBuilder.addFormDataPart("longitude", location.getLongitude() + "");
         multipartBuilder.addPart(Headers.of("Content-Disposition", "form-data; name=\"file\""),
-                RequestBody.create(MEDIA_TYPE_JPG, new File(filepath)));
+                RequestBody.create(MEDIA_TYPE_MPEG, new File(filepath)));
         RequestBody reqBody = multipartBuilder.build();
         Request request =
                 new Request.Builder().url(url).post(reqBody).build();

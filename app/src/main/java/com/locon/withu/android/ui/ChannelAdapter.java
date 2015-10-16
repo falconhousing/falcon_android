@@ -25,7 +25,6 @@ public class ChannelAdapter extends BaseAdapter {
         if (channels == null)
             this.channels = new ArrayList<>();
         this.context = context;
-        this.channels = channels;
         this.inflater = LayoutInflater.from(context);
     }
 

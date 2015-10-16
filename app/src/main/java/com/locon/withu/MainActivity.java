@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alexbbb.uploadservice.MultipartUploadRequest;
 import com.locon.withu.android.ui.android.adapters.MyPagerAdapter;
 import com.locon.withu.location.LocationProvider;
 import com.locon.withu.uploader.Uploader;
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements LocationProvider.
     private static final String LOG_TAG = "MainActivity";
     private LocationProvider mLocationProvider;
     private ArrayList<String> mFragmentNames;
+    private String mFilePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,19 +102,27 @@ public class MainActivity extends AppCompatActivity implements LocationProvider.
                     Bundle extras = data.getExtras();
                     String fileName = extras.getString(Constants.KEY_RECORDED_FILE_URI);
                     Toast.makeText(this, "filename is " + fileName, Toast.LENGTH_LONG).show();
-                    makeFileUploadRequest(fileName);
+                    mFilePath = fileName;
+                    Logger.logd("", fileName);
+                    mLocationProvider = new LocationProvider(this, this);
+                    mLocationProvider.requestLocation();
                 }
         }
     }
 
-    private void makeFileUploadRequest(String fileName) {
-        Uploader.uploadMultipart(Uploader.createRequest(this, "https://www.youtube.com", "2138991"));
+    private void makeFileUploadRequest(Location location) {
+        MultipartUploadRequest request = Uploader.createRequest(this, Constants.AUDIO_UPLOAD_URL, "2138991");
+        // mFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Music/Chasing Cars.mp3";
+        Uploader.uploadMultipart(request, mFilePath, location);
+        //NetworkUtils.initMultipartUpload(Constants.AUDIO_UPLOAD_URL, mFilePath, location);
     }
 
     @Override
     public void onLocationFetched(Location location) {
         Logger.logd(LOG_TAG, "Got new location: latitude: " + location.getLatitude() + " longitude: " + location.getLongitude() + " altitude: " + location.getAltitude());
-        mLocationProvider.requestLocation();
+        if (location != null) {
+            makeFileUploadRequest(location);
+        }
     }
 
     @Override

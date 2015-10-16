@@ -12,4 +12,7 @@ public class Constants {
         public static final String CHANNELS_FRAGMENT = "CHANNELS";
         public static final String LOCATIONS_FRAGMENT = "LOCATIONS";
     }
+
+    public static final String AUDIO_UPLOAD_URL = "http://dharmendrav.housing.com:4000/audios.json";
+
 }
