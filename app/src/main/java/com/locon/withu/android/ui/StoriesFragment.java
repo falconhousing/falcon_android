@@ -5,13 +5,18 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.locon.withu.R;
 
 import butterknife.ButterKnife;
+import butterknife.InjectView;
 
 
 public class StoriesFragment extends Fragment {
+
+    @InjectView(R.id.lvStories)
+    ListView lvStories;
 
     public static StoriesFragment newInstance() {
         StoriesFragment fragment = new StoriesFragment();
