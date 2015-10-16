@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity implements FacebookCallback
         }
         mAccessToken = loginResult.getAccessToken();
         makeLoginCall();
-        getUserFriends();
+        getUser();
     }
 
     private void makeLoginCall() {
@@ -93,10 +93,10 @@ public class LoginActivity extends AppCompatActivity implements FacebookCallback
     }
 
 
-    private void getUserFriends() {
+    private void getUser() {
         new GraphRequest(
                 AccessToken.getCurrentAccessToken(),
-                "/me/friends",
+                "/me/profile",
                 null,
                 HttpMethod.GET,
                 new GraphRequest.Callback() {
