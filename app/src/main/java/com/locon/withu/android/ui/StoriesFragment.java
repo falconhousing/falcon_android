@@ -8,15 +8,21 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.locon.withu.R;
+import com.locon.withu.android.ui.android.adapters.StoriesFetcherTask;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
-public class StoriesFragment extends Fragment {
+public class StoriesFragment extends Fragment implements StoriesFetcherTask.StoriesFetcherListener {
 
     @InjectView(R.id.lvStories)
     ListView lvStories;
+
+    private StoriesAdapter adapter;
+
 
     public static StoriesFragment newInstance() {
         StoriesFragment fragment = new StoriesFragment();
@@ -39,8 +45,21 @@ public class StoriesFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews();
+        fetchStories();
     }
 
     private void initViews() {
+        adapter = new StoriesAdapter(getContext(), null);
+        lvStories.setAdapter(adapter);
+    }
+
+    private void fetchStories() {
+        StoriesFetcherTask task = new StoriesFetcherTask(this);
+        task.execute();
+    }
+
+    @Override
+    public void onStoriesFetched(ArrayList<Story> stories) {
+        adapter.updateContent(stories);
     }
 }

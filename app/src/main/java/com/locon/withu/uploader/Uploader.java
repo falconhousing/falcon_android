@@ -18,6 +18,8 @@ public class Uploader {
     }
 
     public static void uploadMultipart(MultipartUploadRequest request, String filePath, Location location) {
+        if (filePath == null)
+            return;
         File file = new File(filePath);
         request.addFileToUpload(filePath,
                 "audio",
