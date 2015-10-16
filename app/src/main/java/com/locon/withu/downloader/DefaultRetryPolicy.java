@@ -1,8 +1,5 @@
 package com.locon.withu.downloader;
 
-/**
- * Created by maniselvaraj on 15/4/15.
- */
 public class DefaultRetryPolicy implements RetryPolicy {
 
     /**
