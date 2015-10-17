@@ -27,14 +27,17 @@ public class StoriesFetcherTask extends AsyncTask<Void, Void, ArrayList<Story>> 
         String url = Constants.GET_STORIES_URL;
         Response response = NetworkUtils.doGetCall(url);
         ArrayList<Story> stories = Utils.parse(response, StoryWrapper.class).stories;
-        System.out.print(stories.size());
         return stories;
     }
 
     @Override
     protected void onPostExecute(ArrayList<Story> stories) {
-        if (stories != null)
-            listener.onStoriesFetched(stories);
+        if (stories != null) {
+            if (listener != null) {
+                listener.onStoriesFetched(stories);
+                listener = null;
+            }
+        }
     }
 
     public interface StoriesFetcherListener {
