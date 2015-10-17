@@ -80,7 +80,7 @@ public final class Manager implements LocationProvider.LocationProviderListener,
                 mContext.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(mContext);
         mBuilder.setContentTitle("New stories found for you");
-        mBuilder.setContentText("Hey there! I'm Shadow");
+        mBuilder.setContentText("Hey there! I'm shadow");
         mBuilder.setStyle(new NotificationCompat.BigTextStyle().bigText("Hey there! I'm shadow"));
         mBuilder.setSmallIcon(R.drawable.com_facebook_button_icon);
         Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
