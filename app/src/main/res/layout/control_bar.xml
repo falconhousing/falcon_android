@@ -6,19 +6,21 @@
     android:padding="8dp">
 
 
-    <TextView
+    <ImageButton
         android:id="@+id/ibSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignParentLeft="true"
-        android:text="search" />
+        android:background="#000"
+        android:src="@drawable/white_search_icon" />
 
 
-    <TextView
+    <ImageButton
         android:id="@+id/ibTrending"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_alignParentRight="true"
-        android:text="trending" />
+        android:background="#000"
+        android:src="@drawable/trending_icon" />
 
 </RelativeLayout>
