@@ -10,6 +10,7 @@ import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.locon.withu.utils.PrefsHelper;
 import com.locon.withu.wakeful.AlarmListener;
 import com.locon.withu.wakeful.AlarmResponseService;
+import com.locon.withu.wakeful.Manager;
 import com.squareup.okhttp.OkHttpClient;
 
 
@@ -32,6 +33,7 @@ public class MainApplication extends Application {
         PrefsHelper.init(this);
         FacebookSdk.sdkInitialize(this);
         initFresco();
+        Manager.getInstance().init(this);
     }
 
     private void initFresco() {

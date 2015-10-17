@@ -28,6 +28,7 @@ public class StoriesFetcherTask extends AsyncTask<Void, Void, ArrayList<Story>> 
     }
 
     public StoriesFetcherTask(StoriesFetcherListener listener, double latitude, double longitude) {
+        this.listener = listener;
         this.mLatitude = latitude;
         this.mLongitude = longitude;
     }
@@ -35,7 +36,7 @@ public class StoriesFetcherTask extends AsyncTask<Void, Void, ArrayList<Story>> 
     @Override
     protected ArrayList<Story> doInBackground(Void... params) {
         String url = Constants.GET_STORIES_URL;
-        Uri uri = Uri.parse(url).buildUpon().appendQueryParameter("latitude",mLatitude + "").appendQueryParameter("longitude",mLongitude + "").build();
+        Uri uri = Uri.parse(url).buildUpon().appendQueryParameter("latitude", mLatitude + "").appendQueryParameter("longitude", mLongitude + "").build();
         Response response = NetworkUtils.doGetCall(uri.toString());
         ArrayList<Story> stories = Utils.parse(response, StoryWrapper.class).stories;
         System.out.print(stories.size());
