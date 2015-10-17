@@ -101,7 +101,7 @@ public class StoriesAdapter extends BaseAdapter {
     }
 
     public static class StoryViewHolder {
-        private final TextView mLocationTextView;
+        public TextView mLocationTextView;
         public SimpleDraweeView mAvatarView;
         public TextView mPersonTextView;
         public TextView mStoryTitleTextView;
