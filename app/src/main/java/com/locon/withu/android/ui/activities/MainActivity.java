@@ -1,16 +1,16 @@
 package com.locon.withu.android.ui.activities;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.location.Location;
+import android.media.MediaRecorder;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,10 +23,12 @@ import com.locon.withu.uploader.Uploader;
 import com.locon.withu.utils.Logger;
 import com.locon.withu.utils.NetworkUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements LocationProvider.LocationProviderListener {
 
@@ -35,6 +37,11 @@ public class MainActivity extends AppCompatActivity implements LocationProvider.
 
     @InjectView(R.id.tab_layout)
     TabLayout mTabLayout;
+
+
+    @InjectView(R.id.fab)
+    FloatingActionButton recordButton;
+
 
     private static final String LOG_TAG = "MainActivity";
     private LocationProvider mLocationProvider;
@@ -51,16 +58,6 @@ public class MainActivity extends AppCompatActivity implements LocationProvider.
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                startActivityForResult(new Intent(MainActivity.this, AudioRecordActivity.class), Constants.REQUEST_CODE_RECORD);
-            }
-        });
         mLocationProvider = new LocationProvider(this, this);
         mLocationProvider.requestLocation();
         bindViews();
@@ -73,23 +70,6 @@ public class MainActivity extends AppCompatActivity implements LocationProvider.
         FragmentPagerAdapter pagerAdapter = new MyPagerAdapter(getSupportFragmentManager(), mFragmentNames);
         mViewPager.setAdapter(pagerAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case Constants.REQUEST_CODE_RECORD:
-                if (resultCode == Activity.RESULT_OK) {
-                    Bundle extras = data.getExtras();
-                    String fileName = extras.getString(Constants.KEY_RECORDED_FILE_URI);
-                    Toast.makeText(this, "filename is " + fileName, Toast.LENGTH_LONG).show();
-                    mFilePath = fileName;
-                    Logger.logd("", fileName);
-                    mLocationProvider = new LocationProvider(this, this);
-                    mLocationProvider.requestLocation();
-                }
-        }
     }
 
     private void makeFileUploadRequest(Location location) {
@@ -110,5 +90,65 @@ public class MainActivity extends AppCompatActivity implements LocationProvider.
     @Override
     public void onRequestFailed() {
 
+    }
+
+
+    private boolean isRecording = false;
+
+    private MediaRecorder mRecorder = null;
+
+    private String fileName;
+
+    @OnClick(R.id.fab)
+    public void onRecordButtonClick(View view) {
+        if (isRecording) {
+            isRecording = false;
+            stopRecording();
+            recordButton.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_btn_speak_now));
+        } else {
+            isRecording = true;
+            startRecording();
+            recordButton.setImageDrawable(getResources().getDrawable(android.R.drawable.ic_media_pause));
+        }
+    }
+
+    private void startRecording() {
+        fileName = Environment.getExternalStorageDirectory().getAbsolutePath();
+        fileName += "/" + System.currentTimeMillis() + ".3gp";
+        mRecorder = new MediaRecorder();
+        mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+        mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+        mRecorder.setOutputFile(fileName);
+        mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+
+        try {
+            mRecorder.prepare();
+        } catch (IOException e) {
+            Log.e("audio recorder", "prepare() failed");
+        }
+        mRecorder.start();
+    }
+
+    private void stopRecording() {
+        mRecorder.stop();
+        mRecorder.release();
+        mRecorder = null;
+        saveRecording();
+    }
+
+    private void saveRecording() {
+        Toast.makeText(this, "filename is " + fileName, Toast.LENGTH_LONG).show();
+        mFilePath = fileName;
+        mLocationProvider = new LocationProvider(this, this);
+        mLocationProvider.requestLocation();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mRecorder != null) {
+            mRecorder.release();
+            mRecorder = null;
+        }
     }
 }
