@@ -26,7 +26,7 @@ public class ChannelFetcherTask extends AsyncTask<Void, Void, ArrayList<Channel>
     protected ArrayList<Channel> doInBackground(Void... params) {
         String url = Constants.GET_CHANNELS_URL;
         Response response = NetworkUtils.doGetCall(url);
-        ArrayList<Channel> Channels = Utils.parse(response, ChannelWrapper.class).stories;
+        ArrayList<Channel> Channels = Utils.parse(response, ChannelWrapper.class).channels;
         return Channels;
     }
 

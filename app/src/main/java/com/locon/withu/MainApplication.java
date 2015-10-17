@@ -6,6 +6,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.backends.okhttp.OkHttpImagePipelineConfigFactory;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
+import com.locon.withu.utils.PrefsHelper;
 import com.squareup.okhttp.OkHttpClient;
 
 
@@ -24,6 +25,7 @@ public class MainApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        PrefsHelper.init(this);
         FacebookSdk.sdkInitialize(this);
         initFresco();
     }

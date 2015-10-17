@@ -5,6 +5,8 @@ import android.content.Context;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.locon.withu.Constants;
@@ -70,6 +72,7 @@ public class NetworkUtils {
 
     public static void doPostCall(String url, String jsonRequestObject,
                                   OkHttpCallback cb) {
+        url = appendAuthToken(url);
         OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(15, TimeUnit.SECONDS); // connect timeout
         client.setReadTimeout(15, TimeUnit.SECONDS);
@@ -83,6 +86,7 @@ public class NetworkUtils {
 
     public static void doGetCall(String url, OkHttpCallback cb) {
         Logger.logd(NetworkUtils.class, "Url : " + url);
+        url = appendAuthToken(url);
         OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(15, TimeUnit.SECONDS); // connect timeout
         client.setReadTimeout(15, TimeUnit.SECONDS);
@@ -96,6 +100,7 @@ public class NetworkUtils {
      */
 
     public static Response initMultipartUpload(String url, String filepath, Location location) {
+        url = appendAuthToken(url);
         OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(60, TimeUnit.SECONDS); // connect timeout
         client.setReadTimeout(60, TimeUnit.SECONDS);
@@ -128,6 +133,7 @@ public class NetworkUtils {
 
     public static Response doGetCall(String url) {
         Logger.logd(NetworkUtils.class, "Url : " + url);
+        url = appendAuthToken(url);
         OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(15, TimeUnit.SECONDS); // connect timeout
         client.setReadTimeout(15, TimeUnit.SECONDS);
@@ -150,6 +156,7 @@ public class NetworkUtils {
     public static Response doPostCall(String url, String jsonRequestObject) {
         Logger.logd(NetworkUtils.class, "Url : " + url);
         Logger.logd(NetworkUtils.class, "jSon : " + jsonRequestObject);
+        url = appendAuthToken(url);
         OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(20, TimeUnit.SECONDS); // connect timeout
         client.setReadTimeout(20, TimeUnit.SECONDS);
@@ -183,4 +190,12 @@ public class NetworkUtils {
             return false;
     }
 
+    private static String appendAuthToken(String url) {
+        String authToken = PrefsHelper.getString(Constants.PREF_KEY_AUTH_TOKEN, "");
+        if (TextUtils.isEmpty(authToken)) {
+            return url;
+        } else {
+            return Uri.parse(url).buildUpon().appendQueryParameter("login_auth_token", authToken).build().toString();
+        }
+    }
 }

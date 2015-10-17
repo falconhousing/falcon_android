@@ -25,6 +25,8 @@ public abstract class OkHttpCallback<Wrapper> extends Handler implements Callbac
         this.mWrapperClass = wrapperClass;
     }
 
+
+
     @Override
     public final void onFailure(Request request, IOException e) {
         FailureParams params = new FailureParams();

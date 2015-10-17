@@ -1,9 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="12dp"
+    android:paddingLeft="4dp"
+    android:paddingRight="4dp"
+    android:paddingTop="12dp">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/drawee_view_avatar"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="8dp"
+        fresco:roundAsCircle="true" />
 
 
+    <ImageView
+        android:id="@+id/image_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@android:drawable/arrow_down_float" />
 
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/drawee_view_avatar"
+        android:text="Jack Sparrow"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvTrackName1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvUsername"
+        android:layout_toRightOf="@id/drawee_view_avatar"
+        android:text="Stupid Song "
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvTrackName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTrackName1"
+        android:layout_toRightOf="@id/drawee_view_avatar"
+        android:text="Stupid Song 2"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tvMoreTracks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTrackName2"
+        android:layout_toRightOf="@id/drawee_view_avatar"
+        android:drawableLeft="@android:drawable/ic_input_add"
+        android:text="...3 more songs"
+        android:textSize="14sp" />
+
+
+    <Button
+        android:id="@+id/btn_play"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/tvMoreTracks"
+        android:layout_toRightOf="@+id/drawee_view_avatar"
+        android:background="@drawable/capsule_orange"
+        android:backgroundTintMode="add"
+        android:padding="4dp"
+        android:text="@string/play_all"
+        android:textSize="12sp" />
+
+
+    <Button
+        android:id="@+id/btn_follow"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_below="@+id/tvMoreTracks"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@+id/btn_play"
+        android:background="@drawable/capsule_orange"
+        android:minWidth="120dp"
+        android:padding="4dp"
+        android:text="@string/following"
+        android:textSize="12sp" />
+</RelativeLayout>

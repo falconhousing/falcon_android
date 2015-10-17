@@ -1,6 +1,7 @@
 package com.locon.withu.android.ui.android.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,14 +95,13 @@ public class StoriesAdapter extends BaseAdapter {
     }
 
 
-
     public void updateContent(ArrayList<Story> stories) {
         this.stories = stories;
         notifyDataSetChanged();
     }
 
     public static class StoryViewHolder {
-        private final TextView mLocationTextView;
+        public TextView mLocationTextView;
         public SimpleDraweeView mAvatarView;
         public TextView mPersonTextView;
         public TextView mStoryTitleTextView;
@@ -119,6 +119,8 @@ public class StoriesAdapter extends BaseAdapter {
             mLikeButton = (ImageView) view.findViewById(R.id.image_like);
             mPlayButton = (Button) view.findViewById(R.id.btn_play);
             mFollowButton = (Button) view.findViewById(R.id.btn_follow);
+            Uri uri = Uri.parse("https://devimages-housing.s3.amazonaws.com/profile_pictures/d85056e6-8cb2-43c4-89f7-3129d713a130/10297708_10204061098076651_794995807567807314_n.jpg");
+            mAvatarView.setImageURI(uri);
         }
     }
 }
