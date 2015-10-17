@@ -160,12 +160,12 @@ public class LoginActivity extends AppCompatActivity implements FacebookCallback
 
     @Override
     public void onCancel() {
-
+        Logger.logd("fb", "cancelled");
     }
 
     @Override
     public void onError(FacebookException error) {
-
+        Logger.logd("fb", "error: " + error.getMessage());
     }
 
     protected Bundle getBundleParametersForGraphRequest() {
