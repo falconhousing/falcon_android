@@ -39,14 +39,17 @@ public class StoriesFetcherTask extends AsyncTask<Void, Void, ArrayList<Story>> 
         Uri uri = Uri.parse(url).buildUpon().appendQueryParameter("latitude", mLatitude + "").appendQueryParameter("longitude", mLongitude + "").build();
         Response response = NetworkUtils.doGetCall(uri.toString());
         ArrayList<Story> stories = Utils.parse(response, StoryWrapper.class).stories;
-        System.out.print(stories.size());
         return stories;
     }
 
     @Override
     protected void onPostExecute(ArrayList<Story> stories) {
-        if (stories != null)
-            listener.onStoriesFetched(stories);
+        if (stories != null) {
+            if (listener != null) {
+                listener.onStoriesFetched(stories);
+                listener = null;
+            }
+        }
     }
 
     public interface StoriesFetcherListener {

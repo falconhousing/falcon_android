@@ -1,5 +1,6 @@
 package com.locon.withu.android.ui.fragment;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.locon.withu.downloader.ThinDownloadManager;
 import com.locon.withu.models.Story;
 import com.locon.withu.utils.Logger;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.ButterKnife;
@@ -86,7 +88,7 @@ public class StoriesFragment extends Fragment implements StoriesFetcherTask.Stor
             manager = new ThinDownloadManager();
         manager.cancelAll();
         Uri downloadUri = Uri.parse(story.audio_url);
-        Uri destinationUri = Uri.parse(Environment.getDataDirectory() + "" + story.id + ".3gp");
+        Uri destinationUri = Uri.parse(Environment.getExternalStorageDirectory() + "/" + story.id + ".3gp");
         DownloadRequest mRequest = new DownloadRequest(downloadUri)
                 .setDestinationURI(destinationUri).setPriority(DownloadRequest.Priority.LOW)
                 .setRetryPolicy(new DefaultRetryPolicy()).setDownloadId(story.id + "")
@@ -98,9 +100,19 @@ public class StoriesFragment extends Fragment implements StoriesFetcherTask.Stor
 
         @Override
         public void onDownloadComplete(String id) {
-            Uri uri = Uri.parse(Environment.getDataDirectory() + "" + id + ".3gp");
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            startActivity(intent);
+            Uri uri = Uri.parse(Environment.getExternalStorageDirectory() + "/" + id + ".3gp");
+            File file = new File(uri.getPath());
+            if (file.exists()) {
+                Intent i = new Intent();
+                i.setAction(android.content.Intent.ACTION_VIEW);
+                i.setDataAndType(Uri.fromFile(file), "video/*");
+                try {
+                    startActivity(i);
+                } catch (ActivityNotFoundException e) {
+                    e.printStackTrace();
+
+                }
+            }
         }
 
         @Override
@@ -110,7 +122,7 @@ public class StoriesFragment extends Fragment implements StoriesFetcherTask.Stor
 
         @Override
         public void onProgress(String id, long totalBytes, long downloadedBytes, int progress) {
-            Logger.logd("DSD","FS");
+            Logger.logd("DSD", "FS");
         }
 
     }
