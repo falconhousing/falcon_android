@@ -116,7 +116,6 @@ public class StoriesAdapter extends BaseAdapter {
             mViewCountTextView = (TextView) view.findViewById(R.id.views_count);
             mLikeButton = (ImageView) view.findViewById(R.id.image_like);
             mPlayButton = (Button) view.findViewById(R.id.btn_play);
-            mFollowButton = (Button) view.findViewById(R.id.btn_follow);
         }
     }
 }

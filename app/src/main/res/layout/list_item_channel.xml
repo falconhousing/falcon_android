@@ -51,7 +51,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTrackName1"
         android:layout_toRightOf="@id/drawee_view_avatar"
-        android:text="Stupid Song 2"
         android:textSize="14sp" />
 
     <TextView
@@ -60,8 +59,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTrackName2"
         android:layout_toRightOf="@id/drawee_view_avatar"
-        android:drawableLeft="@android:drawable/ic_input_add"
-        android:text="...3 more songs"
         android:textSize="14sp" />
 
 
@@ -75,19 +72,5 @@
         android:backgroundTintMode="add"
         android:padding="4dp"
         android:text="@string/play_all"
-        android:textSize="12sp" />
-
-
-    <Button
-        android:id="@+id/btn_follow"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_below="@+id/tvMoreTracks"
-        android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@+id/btn_play"
-        android:background="@drawable/capsule_orange"
-        android:minWidth="120dp"
-        android:padding="4dp"
-        android:text="@string/following"
         android:textSize="12sp" />
 </RelativeLayout>

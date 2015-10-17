@@ -41,9 +41,9 @@ public class Story {
             int year = calendar.get(Calendar.YEAR);
             if (todayYear == year && todayMonth == month) {
                 if (day == todayDay) {
-                    prefix = "Created today, ";
+                    prefix = "Created today";
                 } else if (day + 1 == todayDay) {
-                    prefix = "Created yesterday, ";
+                    prefix = "Created yesterday";
                 } else {
                     prefix = finalFormat.format(date);
                     prefix = "Created on " + prefix;

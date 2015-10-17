@@ -24,8 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:src="@android:drawable/ic_input_add" />
+        android:layout_alignParentTop="true" />
 
 
     <TextView
@@ -33,7 +32,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/drawee_view_avatar"
-        android:text="Jack Sparrow"
         android:textSize="20sp" />
 
     <TextView
@@ -42,7 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvUsername"
         android:layout_toRightOf="@id/drawee_view_avatar"
-        android:text="Stupid Song "
         android:textSize="16sp" />
 
     <TextView
@@ -51,7 +48,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvTrackName"
         android:layout_toRightOf="@id/drawee_view_avatar"
-        android:drawableLeft="@android:drawable/ic_input_add"
         android:text="Chandivali, Mumbai"
         android:textSize="14sp" />
 
@@ -75,19 +71,5 @@
         android:background="@drawable/capsule_orange"
         android:padding="4dp"
         android:text="@string/play"
-        android:textSize="12sp" />
-
-
-    <Button
-        android:id="@+id/btn_follow"
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_below="@+id/tvLocation"
-        android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@+id/btn_play"
-        android:background="@drawable/capsule_orange"
-        android:minWidth="120dp"
-        android:padding="4dp"
-        android:text="@string/following"
         android:textSize="12sp" />
 </RelativeLayout>
