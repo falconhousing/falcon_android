@@ -63,7 +63,7 @@ public class StoriesAdapter extends BaseAdapter {
     }
 
     private void setItemDetails(int position, StoryViewHolder holder) {
-        Story story = stories.get(position);
+        final Story story = stories.get(position);
         holder.mViewCountTextView.setText(story.views + "");
         holder.mLocationTextView.setText(story.location + "");
         holder.mPlayButton.setTag(story.audio_url);
@@ -73,11 +73,31 @@ public class StoriesAdapter extends BaseAdapter {
             holder.mFollowButton.setText("Follow");
         }
         holder.mFollowButton.setTag(story.isFollowingUser);
+        holder.mPlayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (downloadRequestListener != null)
+                    downloadRequestListener.onDownloadRequest(story);
+            }
+        });
     }
+
+    public interface DownloadRequestListener {
+
+        public void onDownloadRequest(Story story);
+    }
+
+    private DownloadRequestListener downloadRequestListener;
+
+    public void setDownloadRequestListener(DownloadRequestListener listener) {
+        this.downloadRequestListener = listener;
+    }
+
+
 
     public void updateContent(ArrayList<Story> stories) {
         this.stories = stories;
-         notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     public static class StoryViewHolder {
