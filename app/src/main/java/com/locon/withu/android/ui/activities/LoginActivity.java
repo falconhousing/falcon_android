@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -19,6 +18,7 @@ import com.facebook.HttpMethod;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.locon.withu.Constants;
+import com.locon.withu.MainApplication;
 import com.locon.withu.OkHttpCallback;
 import com.locon.withu.R;
 import com.locon.withu.models.User;
@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements FacebookCallback
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (isLoggedIn()) {
+        if (MainApplication.isLoggedIn()) {
             goToHomeScreen();
             return;
         }
@@ -89,9 +89,6 @@ public class LoginActivity extends AppCompatActivity implements FacebookCallback
         initFbStuff();
     }
 
-    private boolean isLoggedIn() {
-        return !TextUtils.isEmpty(PrefsHelper.getString(Constants.PREF_KEY_AUTH_TOKEN, ""));
-    }
 
     private void initFbStuff() {
 

@@ -46,6 +46,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    </application>
 
+        <service android:name=".wakeful.AlarmResponseService" />
+
+        <receiver android:name="com.locon.withu.wakeful.AlarmReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.commonsware.cwac.wakeful"
+                android:resource="@xml/wakeful" />
+        </receiver>
+    </application>
 </manifest>
