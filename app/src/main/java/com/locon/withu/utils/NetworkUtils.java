@@ -132,8 +132,8 @@ public class NetworkUtils {
      */
 
     public static Response doGetCall(String url) {
-        Logger.logd(NetworkUtils.class, "Url : " + url);
         url = appendAuthToken(url);
+        Logger.logd(NetworkUtils.class, "Saraj : " + url);
         OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(15, TimeUnit.SECONDS); // connect timeout
         client.setReadTimeout(15, TimeUnit.SECONDS);
@@ -190,7 +190,7 @@ public class NetworkUtils {
             return false;
     }
 
-    private static String appendAuthToken(String url) {
+    public static String appendAuthToken(String url) {
         String authToken = PrefsHelper.getString(Constants.PREF_KEY_AUTH_TOKEN, "");
         if (TextUtils.isEmpty(authToken)) {
             return url;

@@ -23,6 +23,7 @@ import com.locon.withu.android.ui.android.adapters.MyPagerAdapter;
 import com.locon.withu.location.LocationProvider;
 import com.locon.withu.uploader.Uploader;
 import com.locon.withu.utils.Logger;
+import com.locon.withu.utils.NetworkUtils;
 
 import java.util.ArrayList;
 
@@ -113,7 +114,8 @@ public class MainActivity extends AppCompatActivity implements LocationProvider.
     }
 
     private void makeFileUploadRequest(Location location) {
-        MultipartUploadRequest request = Uploader.createRequest(this, Constants.AUDIO_UPLOAD_URL, "2138991");
+        String url = NetworkUtils.appendAuthToken(Constants.AUDIO_UPLOAD_URL);
+        MultipartUploadRequest request = Uploader.createRequest(this, url, "2138991");
         Uploader.uploadMultipart(request, mFilePath, location);
         //NetworkUtils.initMultipartUpload(Constants.AUDIO_UPLOAD_URL, mFilePath, location);
     }

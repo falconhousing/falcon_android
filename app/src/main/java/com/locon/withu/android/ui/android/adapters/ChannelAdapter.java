@@ -79,11 +79,11 @@ public class ChannelAdapter extends BaseAdapter {
         }
 
         if (storySize >= 1) {
-            holder.mTrackName1.setText(stories.get(0).name);
+            holder.mTrackName1.setText(stories.get(0).getStoryTitle());
         }
 
         if (storySize >= 2) {
-            holder.mTrackName2.setText(stories.get(1).name);
+            holder.mTrackName2.setText(stories.get(1).getStoryTitle());
         }
 
     }
